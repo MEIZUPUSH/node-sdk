@@ -284,9 +284,9 @@ callback|Function|是|无|如果不传入callback则接口返回promise实例
     "code": "200",
     "message": "",
     "value": {
-        "taskId": 20457  (任务Id)
-        "pushType": 0  (推送类型 0通知栏  1 透传)
-        "appId": 100999  (应用的appId)
+        "taskId": 20457,  // 任务Id
+        "pushType": 0,    // 推送类型 0通知栏  1 透传
+        "appId": 100999   // 应用appId
     },
     "redirect": ""
 }

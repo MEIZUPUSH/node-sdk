@@ -1,6 +1,6 @@
 {
   "name": "flyme-push",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Flyme push service Node.js SDK",
   "main": "index.js",
   "scripts": {

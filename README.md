@@ -1,5 +1,10 @@
 # meizu-push
 
+<p align="center">
+  <a href="https://badge.fury.io/js/meizu-push"><img src="https://badge.fury.io/js/meizu-push.svg" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/meizu-push"><img src="https://img.shields.io/npm/l/meizu-push.svg" alt="License"></a>
+</p>
+
 魅族Flyme消息推送服务Node.js版本SDK。
 
 

@@ -131,9 +131,9 @@ push.config({
 
 ### byPushId
 
-功能：全局配置
+功能：根据pushId推送
 
-调用：byPushId(Number pushType, String pushIds, String messageJson[, Function callback])
+调用：byPushId(Integer pushType, String pushIds, String messageJson[, Function callback])
 
 参数|类型|是否可空|默认值|描述
 ---|---|---|---|---
@@ -142,7 +142,420 @@ pushIds|String|否|无|推送设备，多个英文逗号分割必填
 messageJson|String|否|无|参考[消息体格式定义](#消息体格式定义)部分，因pushType不同而不同
 callback|Function|是|无|如果不传入callback则接口返回promise实例
 
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "redirect": "",
+    "value": {}
+}
+```
+
+- 失败
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "value": {
+        "110002": [
+            "J0476035d625e6c64567f71487e040e7d017f0558675b",
+            "J0476045d625e6c64567f71487e040e7d017f0558675b",
+            "J0476035d625e6sd64567f71487e040e7d017f0558675b"
+        ],
+        "110003": [
+            "J0476035d625e6c64567f714567e040e7d017f0558675b"
+        ]
+    },
+    "redirect": ""
+}
+```
+
+- 调用太频繁
+
+``` js
+{
+    "code": "110010",
+    "message": "应用请求频率超过限制",
+    "value": "",
+    "redirect": ""
+}
+```
+
 示例:
 ``` js
-push.byPushId(1, )
+const pushType = 1
+const pushIds = '351780020052892100012,351780020052892100018'
+const messageJson = { content: 'xxxx' }
+
+push.byPushId(pushType, pushIds, messageJson)
+    .then(result => console.log(result.code), err => console.error(err))
 ```
+
+
+### byAlias
+
+功能：根据别名推送
+
+调用：byAlias(Integer pushType, String alias, String messageJson[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+pushType|0或1|否|无|推送类型，0表示通知栏消息，1表示透传消息
+alias|String|否|无|推送别名，多个英文逗号分割必填
+messageJson|String|否|无|参考[消息体格式定义](#消息体格式定义)部分，因pushType不同而不同
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "redirect": "",
+    "value": {}
+}
+```
+
+- 失败
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "value": {
+        "110005": [
+            "alias1",
+            "alisa2"
+        ]
+    },
+    "redirect": ""
+}
+```
+
+- 调用太频繁
+
+``` js
+{
+    "code": "110010",
+    "message": "应用请求频率超过限制",
+    "value": "",
+    "redirect": ""
+}
+```
+
+示例:
+``` js
+const pushType = 1
+const alias = 'your alias'
+const messageJson = { content: 'xxxx' }
+
+push.byAlias(pushType, alias, messageJson)
+    .then(result => console.log(result.code), err => console.error(err))
+```
+
+
+### getTaskId
+
+功能：任务推送，获取任务ID
+
+调用：getTaskId(Integer pushType, String messageJson[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+pushType|0或1|否|无|推送类型，0表示通知栏消息，1表示透传消息
+messageJson|String|否|无|参考[消息体格式定义](#消息体格式定义)部分，因pushType不同而不同
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "value": {
+        "taskId": 20457  (任务Id)
+        "pushType": 0  (推送类型 0通知栏  1 透传)
+        "appId": 100999  (应用的appId)
+    },
+    "redirect": ""
+}
+```
+
+
+### taskByPushTd
+
+功能：任务推送，根据pushId推送
+
+调用：taskByPushTd(Integer pushType, String pushIds, Integer taskId[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+pushType|0或1|否|无|推送类型，0表示通知栏消息，1表示透传消息
+pushIds|String|否|无|推送设备，多个英文逗号分割
+taskId|Integer|否|无|`getTaskId()`接口返回的`taskId`
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "redirect": "",
+    "value": {}
+}
+```
+
+- 失败
+
+``` js
+{
+    "code": "110032",
+    "message": "非法的taskId",
+    "redirect": "",
+    "value": ""
+}
+```
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "value": {
+        "110002": [
+            "J0476035d625e6c64567f71487e040e7d017f0558675b",
+            "J0476045d625e6c64567f71487e040e7d017f0558675b",
+            "J0476035d625e6sd64567f71487e040e7d017f0558675b"
+        ],
+        "110003": [
+            "J0476035d625e6c64567f714567e040e7d017f0558675b"
+        ]
+    },
+    "redirect": ""
+}
+```
+
+
+### taskByAlias
+
+功能：任务推送，根据别名推送
+
+调用：taskByAlias(Integer pushType, String alias, Integer taskId[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+pushType|0或1|否|无|推送类型，0表示通知栏消息，1表示透传消息
+alias|String|否|无|推送别名，多个英文逗号分割
+taskId|Integer|否|无|`getTaskId()`接口返回的`taskId`
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "redirect": "",
+    "value": {}
+}
+```
+
+- 失败
+
+``` js
+{
+    "code": "110032",
+    "message": "非法的taskId",
+    "redirect": "",
+    "value": ""
+}
+```
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "value": {
+        "110005": [
+            "alias1",
+            "alias2"
+        ]
+    },
+    "redirect": ""
+}
+```
+
+
+### toApp
+
+功能：全部用户推送
+
+应用场景：例如音乐中心搞一个全网活动，需要对所有安装此应用的用户推送消息
+
+调用：toApp(Integer pushType, String messageJson[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+pushType|0或1|否|无|推送类型，0表示通知栏消息，1表示透传消息
+messageJson|String|否|无|参考[消息体格式定义](#消息体格式定义)部分，因pushType不同而不同
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "value": {
+        "taskId": 20457 (任务Id)
+        "pushType": 0 (推送类型 0通知栏  1 透传)
+        "appId": 100999 (应用appId)
+    },
+    "redirect": ""
+}
+```
+
+
+### toTag
+
+功能：全部用户推送
+
+应用场景：例如阅读咨询应用做新闻推送，指定不同标签的用户推送不同的内容，推送不同标签用户感兴趣的内容。订阅了娱乐的推送娱乐新闻，订阅了美食的推送美食信息
+
+调用：toTag(Integer pushType, String messageJson, String tagNames, Integer scope[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+pushType|0或1|否|无|推送类型，0表示通知栏消息，1表示透传消息
+messageJson|String|否|无|参考[消息体格式定义](#消息体格式定义)部分，因pushType不同而不同
+tagNames|String|否|无|推送标签，多个通过英文逗号分割
+scope|0或1|否|无|0表示并集，1表示交集
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "value": {
+        "taskId": 20457, 任务Id
+        "pushType": 0, 推送类型 0通知栏  1 透传
+        "appId": 100999推送应用Id
+    },
+    "redirect": ""
+}
+```
+
+
+### cancel
+
+功能：取消任务推送（只针对全部用户推送待推送和推送中的任务取消）
+
+调用：cancel(Integer pushType, Integer taskId[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+pushType|0或1|否|无|推送类型，0表示通知栏消息，1表示透传消息
+taskId|Integer|否|无|`getTaskId()`接口返回的`taskId`
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "redirect": "",
+    "value": {
+        "result": true 成功
+    }
+}
+```
+
+- 失败
+
+``` js
+{
+    "code": "110032",
+    "message": "非法的taskId",
+    "redirect": "",
+    "value": ""
+}
+```
+或
+``` js
+{
+    "code": "500",
+    "message": "任务已取消[已完成]，无法取消",
+    "redirect": "",
+    "value": ""
+}
+```
+
+
+### getTaskStatistics
+
+功能：获取任务推送统
+
+调用：getTaskStatistics(Integer taskId[, Function callback])
+
+参数|类型|是否可空|默认值|描述
+---|---|---|---|---
+taskId|Integer|否|无|`getTaskId()`接口返回的`taskId`
+callback|Function|是|无|如果不传入callback则接口返回promise实例
+
+响应：
+
+- 成功
+
+``` js
+{
+    "code": "200",
+    "message": "",
+    "redirect": "",
+    "value": {
+        "taskId": 任务Id,
+        "targetNo": 目标数,
+        "validNo": 有效数,
+        "pushedNo": 推送数,
+        "acceptNo ": 接收数,
+        "displayNo": 展示数,
+        "clickNo": 点击数
+    }
+}
+```
+
+- 失败
+
+``` js
+{
+    "code": "110032",
+    "message": "非法的taskId",
+    "redirect": "",
+    "value": ""
+}
+```
+
+## Licence
+
+MIT.

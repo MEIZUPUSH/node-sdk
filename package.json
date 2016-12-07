@@ -1,7 +1,7 @@
 {
   "name": "meizu-push",
   "version": "0.1.0",
-  "description": "Flyme push service Node.js SDK",
+  "description": "Meizu Flyme push service Node.js SDK",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

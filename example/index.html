@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+    html,
+    body,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        -webkit-tap-highlight-color: #ccc;
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", sans-serif;
+        font-size: 14px;
+        /*background-color: #333;*/
+    }
+    
+    form {
+        /*border: 1px dashed #DDD;*/
+        background-color: #efefef;
+        width: 800px;
+        margin: 15px auto;
+        padding: 15px 30px;
+    }
+
+    form:first-child {
+        margin-top: 60px;
+    }
+
+    form.last {
+        margin-bottom: 60px;
+    }
+    
+    form h4 {
+        text-align: center;
+        font-size: 16px;
+        color: #2DB7F5;
+        line-height: 0;
+    }
+
+    form p {
+        margin-top: 10px;
+    }
+
+    label {
+        display: inline-block;
+        width: 120px;
+        text-align: left;
+        vertical-align: middle;
+    }
+    
+    input, textarea, select {
+        outline: none;
+        border: 1px solid #DDD;
+        padding: 5px 10px;
+        vertical-align: middle;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #2DB7F5;
+    }
+
+    input, textarea {
+        width: 650px;
+        font-family: Consolas;
+    }
+
+    textarea {
+        vertical-align: top;
+    }
+
+    button {
+        background-color: #2DB7F5;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 3px;
+        color: #FFF;
+        outline: none;
+        cursor: pointer;
+        margin-left: 125px;
+    }
+    
+    button:hover,
+    button:active {
+        background-color: #E04F5F;
+    }
+    </style>
+</head>
+
+<body>
+    <form action="/api/byPushId">
+        <h4>push.byPushId()</h4>
+        <p>
+            <label for="pushType-1">pushType: </label>
+            <select id="pushType-1" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="pushIds-1">pushIds: </label>
+            <input id="pushIds-1" name="pushIds" placeholder="imei+appId" />
+            <!-- 861069030198587100999 -->
+        </p>
+        <p>
+            <label for="messageJson-1">messageJson: </label>
+            <textarea id="messageJson-1" name="messageJson" rows="10">
+{
+    "noticeBarInfo": {
+        "noticeBarType": 0,
+        "title": "push sdk demo title",
+        "content": "push sdk demo content..."
+    }
+}
+            </textarea>
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/byAlias">
+        <h4>push.byAlias()</h4>
+        <p>
+            <label for="pushType-2">pushType: </label>
+            <select id="pushType-2" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="alias-2">alias: </label>
+            <input id="alias-2" name="alias" placeholder="alias" />
+            <!-- Android -->
+        </p>
+        <p>
+            <label for="messageJson-2">messageJson: </label>
+            <textarea id="messageJson-2" name="messageJson" rows="10">
+{
+    "noticeBarInfo": {
+        "noticeBarType": 0,
+        "title": "push sdk demo title",
+        "content": "push sdk demo content..."
+    }
+}
+            </textarea>
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/getTaskId">
+        <h4>push.getTaskId()</h4>
+        <p>
+            <label for="pushType-3">pushType: </label>
+            <select id="pushType-3" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="messageJson-3">messageJson: </label>
+            <textarea id="messageJson-3" name="messageJson" rows="10">
+{
+    "noticeBarInfo": {
+        "noticeBarType": 0,
+        "title": "push sdk demo title",
+        "content": "push sdk demo content..."
+    }
+}
+            </textarea>
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/taskByPushTd">
+        <h4>push.taskByPushTd()</h4>
+        <p>
+            <label for="pushType-4">pushType: </label>
+            <select id="pushType-4" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="pushIds-4">pushIds: </label>
+            <input id="pushIds-4" name="pushIds" placeholder="imei+appId" />
+            <!-- 861069030198587100999 -->
+        </p>
+        <p>
+            <label for="taskId-4">taskId: </label>
+            <input id="taskId-4" name="taskId" place="请先调用getTaskId()获取taskId值" />
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/taskByAlias">
+        <h4>push.taskByAlias()</h4>
+        <p>
+            <label for="pushType-5">pushType: </label>
+            <select id="pushType-5" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="pushIds-5">alias: </label>
+            <input id="pushIds-5" name="alias" placeholder="alias" />
+            <!-- Android -->
+        </p>
+        <p>
+            <label for="taskId-5">taskId: </label>
+            <input id="taskId-5" name="taskId" place="请先调用getTaskId()获取taskId值" />
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/toApp">
+        <h4>push.toApp()</h4>
+        <p>
+            <label for="pushType-6">pushType: </label>
+            <select id="pushType-6" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="messageJson-6">messageJson: </label>
+            <textarea id="messageJson-6" name="messageJson" rows="10">
+{
+    "noticeBarInfo": {
+        "noticeBarType": 0,
+        "title": "push sdk demo title",
+        "content": "push sdk demo content..."
+    }
+}
+            </textarea>
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/toTag">
+        <h4>push.toTag()</h4>
+        <p>
+            <label for="pushType-7">pushType: </label>
+            <select id="pushType-7" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="scope-7">scope: </label>
+            <select id="scope-7" name="scope">
+                <option value="0">并集</option>
+                <option value="1">交集</option>
+            </select>
+        </p>
+        <p>
+            <label for="tagNames-7">tagNames: </label>
+            <input id="tagNames-7" name="tagNames" placeholder="tagNames" />
+            <!-- tech -->
+        </p>
+        <p>
+            <label for="messageJson-7">messageJson: </label>
+            <textarea id="messageJson-7" name="messageJson" rows="10">
+{
+    "noticeBarInfo": {
+        "noticeBarType": 0,
+        "title": "push sdk demo title",
+        "content": "push sdk demo content..."
+    }
+}
+            </textarea>
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/cancel">
+        <h4>push.cancel()</h4>
+        <p>
+            <label for="pushType-8">pushType: </label>
+            <select id="pushType-8" name="pushType">
+                <option value="0">通知栏消息</option>
+                <option value="1">透传消息</option>
+            </select>
+        </p>
+        <p>
+            <label for="taskId-8">taskId: </label>
+            <input id="taskId-8" name="taskId" place="请先调用getTaskId()获取taskId值" />
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <form action="/api/getTaskStatistics" class="last">
+        <h4>push.getTaskStatistics()</h4>
+        <p>
+            <label for="taskId-9">taskId: </label>
+            <input id="taskId-9" name="taskId" place="请先调用getTaskId()获取taskId值" />
+        </p>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('form').on('submit', function(e) {
+                e.preventDefault()
+
+                var $form = $(this)
+                var data = $form.serializeArray().reduce(function(obj, item) {
+                    obj[item.name] = item.value
+                    return obj
+                }, {})
+
+                if('messageJson' in data && data.messageJson) {
+                    try {
+                        data.messageJson = JSON.parse(data.messageJson)
+                    } catch(e) {
+                        alert('messageJson 数据结构不对，请填入正确的json格式')
+                        return
+                    }
+                }
+
+                data.messageJson = JSON.stringify(data.messageJson)
+
+                console.info(data)
+
+                $.ajax({
+                    url: $form.attr('action'),
+                    method: 'POST',
+                    data: data,
+                    success: function(r) {
+                        console.log(r)
+                    },
+                    error: function(e) {
+                        console.error(e.responseText)
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

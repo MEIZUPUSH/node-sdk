@@ -298,11 +298,11 @@ callback|Function|是|无|如果不传入callback则接口返回promise实例
 ```
 
 
-### taskByPushTd
+### taskByPushId
 
 功能：任务推送，根据pushId推送
 
-调用：taskByPushTd(Integer pushType, String pushIds, Integer taskId[, Function callback])
+调用：taskByPushId(Integer pushType, String pushIds, Integer taskId[, Function callback])
 
 参数|类型|是否可空|默认值|描述
 ---|---|---|---|---
